@@ -12,11 +12,8 @@ from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import A4
 
 
-app = Flask(
-    __name__,
-    template_folder="../frontend/templates",
-    static_folder="../frontend/static"
-)
+# ✅ FIXED FLASK INITIALIZATION (IMPORTANT)
+app = Flask(__name__)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATABASE = os.path.join(BASE_DIR, "database.db")
@@ -84,8 +81,7 @@ def index():
     return render_template("index.html")
 
 
-# ================= OPTION 2 ROUTE ================= #
-# Navbar Patient Checkup → redirects to add_patient
+# ================= REDIRECT TO ADD PATIENT ================= #
 
 @app.route("/patient_checkup")
 def patient_checkup():
@@ -160,10 +156,9 @@ def add_patient():
         hr = int(request.form["heart_rate"])
         temp = float(request.form["temperature"])
 
-        # 🔥 Proper unpack (must match risk_engine return order)
         (
             risk,
-            confidence,          # already percentage
+            confidence,
             severity_index,
             department,
             priority,
@@ -179,8 +174,6 @@ def add_patient():
             conditions_list,
             symptoms_list
         )
-
-        # ================= SAVE ================= #
 
         if request.form.get("action") == "save":
 
@@ -202,7 +195,7 @@ def add_patient():
                 conditions,
                 risk,
                 department,
-                confidence / 100  # store as decimal
+                confidence / 100
             ))
 
             conn.commit()
