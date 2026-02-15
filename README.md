@@ -1,69 +1,89 @@
 # AURA TRIAGE 🏥
 
-![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python)
+![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)
 ![Flask](https://img.shields.io/badge/Flask-Web%20Framework-black?logo=flask)
 ![SQLite](https://img.shields.io/badge/Database-SQLite-blue?logo=sqlite)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Version](https://img.shields.io/badge/Version-1.0-orange)
+![Status](https://img.shields.io/badge/Status-Live-success)
 
-AURA (Automated Urgency Risk Assessment) TRIAGE is an AI-powered patient triage system designed to evaluate clinical severity using vital parameters and risk scoring logic.
+## 🌐 Live Demo
+🔗 https://aura-triage.onrender.com
 
+---
 
-## 🔥 Features
+## 📌 Overview
 
-- Severity Index Calculation
-- Risk Classification (Green / Yellow / Red)
-- Flask Backend
-- SQLite Database
-- PDF Report Generation
-- Interactive Dashboard UI
+**AURA (Automated Urgency Risk Assessment) TRIAGE** is an AI-powered clinical triage system designed to evaluate patient severity using vital parameters, symptom analysis, and a structured risk scoring model.
+
+The system assists in prioritizing patients based on clinical urgency, enabling faster and smarter medical decision-making.
+
+---
+
+## 🔥 Core Features
+
+- 🧠 Severity Index Calculation
+- 🚦 Risk Classification (Stable / Moderate / Critical)
+- 🏥 Department Recommendation
+- 📊 Interactive Dashboard Analytics
+- 📄 Automated PDF Report Generation
+- 🆔 Unique Patient ID Generation
+- 🌍 Fully Deployed Web Application
+
+---
 
 ## 🛠️ Tech Stack
 
-- Frontend: HTML, CSS, JavaScript
-- Backend: Python (Flask)
-- Database: SQLite
-- Reporting: ReportLab
+### 💻 Frontend
+- HTML
+- CSS
+- JavaScript
 
-## 🚀 How to Run
+### ⚙️ Backend
+- Python
+- Flask Framework
 
-1. Clone the repository:
-   git clone https://github.com/yourusername/AURA-TRIAGE.git
+### 🗄️ Database
+- SQLite
 
-2. Install dependencies:
-   pip install -r requirements.txt
+### 📄 Reporting
+- ReportLab (PDF Generation)
 
-3. Run the application:
-   python app.py
+### 🚀 Deployment
+- Render (Gunicorn Production Server)
 
-4. Open browser:
-   http://127.0.0.1:5000
+---
 
 ## 📊 Severity Index Model
 
-Patients are classified based on a risk scoring algorithm:
-- Green → Stable
-- Yellow → Moderate Risk
-- Red → Critical
+The system evaluates patients based on:
+
+- Age
+- Blood Pressure
+- Heart Rate
+- Temperature
+- Symptoms
+- Existing Medical Conditions
+
+### Risk Categories:
+
+- 🟢 **Stable** → Low priority
+- 🟡 **Moderate Attention** → Requires monitoring
+- 🔴 **Critical Priority** → Immediate medical intervention
+
+The output includes:
+- Severity Index
+- Risk Level
+- Department Allocation
+- Confidence Score
+- Estimated Wait Time
 
 ---
 
-## 📸 Project Preview
+## 🚀 Installation & Local Setup
 
-### 🏠 Home Page
-![Home](screenshots/index.png)
+### 1️⃣ Clone Repository
 
----
-
-### 📝 Add Patient Form
-![Add Patient](screenshots/add_patient.png)
-
----
-
-### 📊 Dashboard
-![Dashboard](screenshots/dashboard.png)
-
----
-
-### 📄 PDF Report Preview
-![Report](screenshots/report_preview.png)
+```bash
+git clone https://github.com/yourusername/AURA-TRIAGE.git
+cd AURA-TRIAGE
