@@ -38,3 +38,25 @@ Patients are classified based on a risk scoring algorithm:
 - Green → Stable
 - Yellow → Moderate Risk
 - Red → Critical
+
+---
+
+## 📸 Project Preview
+
+### 🏠 Home Page
+![Home](screenshots/index.png)
+
+---
+
+### 📝 Add Patient Form
+![Add Patient](screenshots/add_patient.png)
+
+---
+
+### 📊 Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+---
+
+### 📄 PDF Report Preview
+![Report](screenshots/report_preview.png)
