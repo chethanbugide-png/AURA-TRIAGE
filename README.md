@@ -2,6 +2,17 @@
 
 AURA (Automated Urgency Risk Assessment) TRIAGE is an AI-powered patient triage system designed to evaluate clinical severity using vital parameters and risk scoring logic.
 
+# AURA TRIAGE 🏥
+
+![Python](...)
+![Flask](...)
+![SQLite](...)
+![License](...)
+![Version](...)
+
+AURA (Automated Urgency Risk Assessment) TRIAGE is an AI-powered patient triage system...
+
+
 ## 🔥 Features
 
 - Severity Index Calculation
