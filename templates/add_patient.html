@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AURA TRIAGE | Clinical Intake</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<style>
+
+/* PAGE */
+body {
+    background: linear-gradient(135deg, #f0fdf4, #ffffff);
+}
+
+/* WRAPPER */
+.page-wrapper {
+    max-width: 1050px;
+    margin: 60px auto;
+    padding: 0 25px;
+}
+
+/* CARD */
+.form-card {
+    background: white;
+    padding: 45px;
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+}
+
+/* TITLE */
+.form-card h1 {
+    text-align: center;
+    margin-bottom: 35px;
+    font-weight: 700;
+    color: #111827;
+}
+
+/* SECTION */
+.section {
+    margin-bottom: 30px;
+}
+
+.section h3 {
+    margin-bottom: 12px;
+    font-weight: 600;
+    color: #16a34a;
+    border-left: 4px solid #16a34a;
+    padding-left: 10px;
+}
+
+/* GRID */
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+/* INPUTS */
+input, select {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    transition: 0.2s ease;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #16a34a;
+    box-shadow: 0 0 0 3px rgba(22,163,74,0.15);
+}
+
+/* CHECKBOX PILLS */
+.checkbox-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.checkbox-item input {
+    display: none;
+}
+
+.checkbox-item span {
+    padding: 7px 14px;
+    border-radius: 25px;
+    border: 1px solid #d1d5db;
+    cursor: pointer;
+    font-size: 13px;
+    transition: 0.2s ease;
+}
+
+.checkbox-item input:checked + span {
+    background: #16a34a;
+    color: white;
+    border-color: #16a34a;
+}
+
+/* RESULT PANEL */
+.result-panel {
+    margin-top: 35px;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+}
+
+.risk-critical { color: #dc2626; }
+.risk-moderate { color: #d97706; }
+.risk-stable { color: #16a34a; }
+
+/* METERS */
+.meter {
+    height: 12px;
+    background: #e5e7eb;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 6px;
+    margin-bottom: 15px;
+}
+
+.meter-fill {
+    height: 100%;
+    width: 0;
+    border-radius: 20px;
+    transition: width 0.8s ease;
+}
+
+.fill-critical { background: #dc2626; }
+.fill-moderate { background: #f59e0b; }
+.fill-stable { background: #16a34a; }
+
+/* KEY FACTORS */
+.key-factors ul {
+    padding-left: 20px;
+    margin-top: 8px;
+}
+
+.key-factors li {
+    line-height: 1.6;
+}
+
+/* BUTTON */
+.submit-section {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.submit-btn {
+    padding: 12px 34px;
+    border-radius: 8px;
+    border: none;
+    background: #16a34a;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.submit-btn:hover {
+    background: #15803d;
+}
+
+@media(max-width: 768px){
+    .grid-2 { grid-template-columns: 1fr; }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <h2>AURA TRIAGE</h2>
+    <a href="/dashboard"><button class="secondary-btn">Dashboard</button></a>
+</div>
+
+<div class="page-wrapper">
+<div class="form-card">
+
+<h1>Clinical Patient Intake</h1>
+
+<form method="POST">
+
+<!-- DEMOGRAPHICS -->
+<div class="section">
+<h3>Demographics</h3>
+<div class="grid-2">
+
+<input type="number" name="age"
+value="{{ form_data.get('age') if form_data else '' }}"
+placeholder="Age" required>
+
+<select name="gender" required>
+<option value="">Select Gender</option>
+<option value="Male" {% if form_data and form_data.get('gender')=='Male' %}selected{% endif %}>Male</option>
+<option value="Female" {% if form_data and form_data.get('gender')=='Female' %}selected{% endif %}>Female</option>
+<option value="Other" {% if form_data and form_data.get('gender')=='Other' %}selected{% endif %}>Other</option>
+</select>
+
+</div>
+</div>
+
+<!-- SYMPTOMS -->
+<div class="section">
+<h3>Primary Symptoms</h3>
+<div class="checkbox-grid">
+
+{% set selected_symptoms = form_data.getlist('symptoms') if form_data else [] %}
+
+{% for symptom in ["Chest Pain","Shortness of Breath","High Fever","Persistent Cough","Severe Headache","Loss of Consciousness","Stroke Signs","Abdominal Pain","Vomiting","Dizziness"] %}
+<label class="checkbox-item">
+<input type="checkbox" name="symptoms" value="{{ symptom }}"
+{% if symptom in selected_symptoms %}checked{% endif %}>
+<span>{{ symptom }}</span>
+</label>
+{% endfor %}
+
+</div>
+</div>
+
+<!-- VITALS -->
+<div class="section">
+<h3>Vital Signs</h3>
+<div class="grid-2">
+
+<input type="number" name="blood_pressure"
+value="{{ form_data.get('blood_pressure') if form_data else '' }}"
+placeholder="Blood Pressure (mmHg)" required>
+
+<input type="number" name="heart_rate"
+value="{{ form_data.get('heart_rate') if form_data else '' }}"
+placeholder="Heart Rate (bpm)" required>
+
+<input type="number" step="0.1" name="temperature"
+value="{{ form_data.get('temperature') if form_data else '' }}"
+placeholder="Temperature (°F)" required>
+
+</div>
+</div>
+
+<!-- CONDITIONS -->
+<div class="section">
+<h3>Pre-existing Conditions</h3>
+<div class="checkbox-grid">
+
+{% set selected_conditions = form_data.getlist('conditions') if form_data else [] %}
+
+{% for condition in ["Diabetes","Hypertension","Heart Disease","Asthma","Kidney Disease","Cancer","Obesity"] %}
+<label class="checkbox-item">
+<input type="checkbox" name="conditions" value="{{ condition }}"
+{% if condition in selected_conditions %}checked{% endif %}>
+<span>{{ condition }}</span>
+</label>
+{% endfor %}
+
+</div>
+</div>
+
+{% if analyzed %}
+<div class="result-panel">
+
+<h2 class="{% if risk == 'Critical Priority' %}risk-critical{% elif risk == 'Moderate Attention' %}risk-moderate{% else %}risk-stable{% endif %}">
+{{ risk }}
+</h2>
+
+<p><strong>Department:</strong> {{ department or 'General Physician' }}</p>
+<p><strong>Priority:</strong> {{ priority or 'Standard Care' }}</p>
+<p><strong>Estimated Wait:</strong> {{ wait_time or 'N/A' }}</p>
+
+<p><strong>Severity Index:</strong> {{ severity_index|default(0) }}/100</p>
+<div class="meter">
+    <div id="severityBar"
+         class="meter-fill {% if risk == 'Critical Priority' %}fill-critical{% elif risk == 'Moderate Attention' %}fill-moderate{% else %}fill-stable{% endif %}"
+         data-value="{{ severity_index|default(0) }}">
+    </div>
+</div>
+
+<p><strong>AI Confidence:</strong> {{ confidence|default(0) }}%</p>
+<div class="meter">
+    <div id="confidenceBar"
+         class="meter-fill fill-stable"
+         data-value="{{ confidence|default(0) }}">
+    </div>
+</div>
+
+<p><strong>AI Clinical Explanation:</strong></p>
+<p>{{ explanation or 'Clinical evaluation complete.' }}</p>
+
+{% if key_factors %}
+<div class="key-factors">
+<strong>Key Factors:</strong>
+<ul>
+{% for factor in key_factors %}
+<li>{{ factor }}</li>
+{% endfor %}
+</ul>
+</div>
+{% endif %}
+
+</div>
+{% endif %}
+
+<div class="submit-section">
+{% if analyzed %}
+<button type="submit" name="action" value="save" class="submit-btn">
+Confirm & Save Patient
+</button>
+{% else %}
+<button type="submit" class="submit-btn">
+Analyze Patient Risk
+</button>
+{% endif %}
+</div>
+
+</form>
+</div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+    const severity = document.getElementById("severityBar");
+    const confidence = document.getElementById("confidenceBar");
+
+    if (severity) {
+        setTimeout(() => {
+            severity.style.width = severity.dataset.value + "%";
+        }, 200);
+    }
+
+    if (confidence) {
+        setTimeout(() => {
+            confidence.style.width = confidence.dataset.value + "%";
+        }, 300);
+    }
+
+});
+</script>
+
+</body>
+</html>

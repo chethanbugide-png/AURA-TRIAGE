@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AURA TRIAGE | Clinical Risk Management</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<style>
+
+/* ===== BASE ===== */
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #e8f5ef, #f8fafc);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color: #111827;
+    animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== NAVBAR ===== */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 20px;
+    color: #16a34a;
+    letter-spacing: 0.5px;
+}
+
+/* Only Dashboard button now */
+
+.dashboard-btn {
+    padding: 8px 20px;
+    border-radius: 6px;
+    background: #16a34a;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 14px rgba(22,163,74,0.25);
+}
+
+.dashboard-btn:hover {
+    background: #15803d;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(22,163,74,0.35);
+}
+
+/* ===== HERO SECTION ===== */
+
+.hero-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 750px;
+}
+
+.hero-content h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #065f46;
+}
+
+.hero-content p {
+    font-size: 16px;
+    color: #4b5563;
+    margin-bottom: 35px;
+    line-height: 1.6;
+}
+
+/* ===== CTA BUTTON ===== */
+
+.cta-btn {
+    padding: 14px 36px;
+    font-size: 15px;
+    border-radius: 8px;
+    border: none;
+    background: #16a34a;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 6px 18px rgba(22,163,74,0.25);
+}
+
+.cta-btn:hover {
+    background: #15803d;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(22,163,74,0.35);
+}
+
+.cta-btn:active {
+    transform: scale(0.97);
+}
+
+/* ===== FOOTER TEXT ===== */
+
+.subtext {
+    margin-top: 25px;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        padding: 15px 25px;
+    }
+
+    .hero-content h1 {
+        font-size: 30px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">AURA TRIAGE</div>
+    <a href="/dashboard" class="dashboard-btn">Dashboard</a>
+</div>
+
+<!-- HERO -->
+<div class="hero-section">
+    <div class="hero-content">
+        <h1>AI-Powered Patient Triage System</h1>
+        <p>
+            AURA TRIAGE analyzes clinical symptoms and vital parameters to
+            intelligently classify patient risk levels, prioritize emergency cases,
+            and streamline hospital workflows with explainable AI insights.
+        </p>
+
+        <a href="/add_patient">
+            <button class="cta-btn">Start Clinical Assessment</button>
+        </a>
+
+        <div class="subtext">
+            Secure Clinical Decision Support Environment
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

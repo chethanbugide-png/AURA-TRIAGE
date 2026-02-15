@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ risk_type }} Patients | AURA TRIAGE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #111827;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 50px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .navbar h2 {
+            margin: 0;
+            font-weight: 600;
+            color: #16a34a;
+        }
+
+        .navbar button {
+            padding: 8px 18px;
+            border-radius: 6px;
+            border: 1px solid #d1d5db;
+            background-color: #ffffff;
+            color: #111827;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .navbar button:hover {
+            background-color: #f9fafb;
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            padding: 50px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        h1 {
+            margin-bottom: 25px;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        /* ===== EXPORT BUTTON ===== */
+        .export-btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            background-color: #16a34a;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s ease;
+            margin-bottom: 25px;
+        }
+
+        .export-btn:hover {
+            background-color: #15803d;
+        }
+
+        /* ===== TABLE ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+        }
+
+        th {
+            background-color: #f9fafb;
+            padding: 14px;
+            text-align: center;
+            font-weight: 600;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        tr:hover {
+            background-color: #f9fafb;
+        }
+
+        /* ===== RISK COLORS ===== */
+        .critical {
+            color: #dc2626;
+            font-weight: 600;
+        }
+
+        .moderate {
+            color: #d97706;
+            font-weight: 600;
+        }
+
+        .stable {
+            color: #16a34a;
+            font-weight: 600;
+        }
+
+        /* ===== EMPTY STATE ===== */
+        .empty-state {
+            margin-top: 40px;
+            padding: 30px;
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            text-align: center;
+            color: #6b7280;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+
+            table {
+                font-size: 13px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <h2>AURA TRIAGE</h2>
+    <div>
+        <a href="/dashboard"><button>Dashboard</button></a>
+    </div>
+</div>
+
+<div class="container">
+
+    <h1>{{ risk_type }} Patients</h1>
+
+    <!-- EXPORT BUTTON -->
+    <a href="{{ url_for('export_pdf', risk_type=risk_type) }}">
+        <button class="export-btn">
+            Download {{ risk_type }} Report (PDF)
+        </button>
+    </a>
+
+    {% if patients %}
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Risk</th>
+            <th>Department</th>
+            <th>Confidence</th>
+        </tr>
+
+        {% for p in patients %}
+        <tr>
+            <td>{{ p[0] }}</td>
+            <td>{{ p[1] }}</td>
+            <td>{{ p[2] }}</td>
+
+            <td class="
+                {% if p[8] == 'Critical Priority' %}critical
+                {% elif p[8] == 'Moderate Attention' %}moderate
+                {% else %}stable{% endif %}
+            ">
+                {{ p[8] }}
+            </td>
+
+            <td>{{ p[9] }}</td>
+            <td>{{ (p[10] * 100)|round(1) }}%</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+    {% else %}
+    <div class="empty-state">
+        No patients found under {{ risk_type }} category.
+    </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
