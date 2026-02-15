@@ -38,9 +38,3 @@ Patients are classified based on a risk scoring algorithm:
 - Green → Stable
 - Yellow → Moderate Risk
 - Red → Critical
-
-## 👨‍💻 Developed By
-
-Chethan Bugide
-B.Tech CSE
-
