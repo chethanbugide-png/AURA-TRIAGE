@@ -1,16 +1,12 @@
 # AURA TRIAGE 🏥
 
+![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python)
+![Flask](https://img.shields.io/badge/Flask-Web%20Framework-black?logo=flask)
+![SQLite](https://img.shields.io/badge/Database-SQLite-blue?logo=sqlite)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Version](https://img.shields.io/badge/Version-1.0-orange)
+
 AURA (Automated Urgency Risk Assessment) TRIAGE is an AI-powered patient triage system designed to evaluate clinical severity using vital parameters and risk scoring logic.
-
-# AURA TRIAGE 🏥
-
-![Python](...)
-![Flask](...)
-![SQLite](...)
-![License](...)
-![Version](...)
-
-AURA (Automated Urgency Risk Assessment) TRIAGE is an AI-powered patient triage system...
 
 
 ## 🔥 Features
